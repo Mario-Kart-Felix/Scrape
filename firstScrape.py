@@ -93,9 +93,7 @@ for d in data:
       # click next
       nex.click()
       time.sleep(2)
-      # initial = driver.find_element_by_xpath('//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[1]/div[1]/div/div[1]/span')
-      # driver.execute_script("return arguments[0].scrollIntoView(true);", initial)
-      # time.sleep(2)
+      
       element = driver.find_element_by_xpath('//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div[2]/div[3]/div/a')
       driver.execute_script("return arguments[0].scrollIntoView(true);", element)
       
@@ -138,54 +136,3 @@ for d in data:
   df = pd.DataFrame({"name" : np_name_array, "role" : np_role_array, "city" : np_home_array})
   df.to_csv(f"/Users/danielschwartz/Desktop/SF_csv/{str_company}.csv")
   driver.quit()
-
-
-
-
-# for e in employees:
-#   while tr < 26:
-#     employee_name = driver.find_element_by_xpath(f'//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[{tr}]/td[1]/div/div[2]/div[3]/div/a')
-#     employee_role = driver.find_element_by_xpath(f'//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[{tr}]/td[2]')
-    
-#     name_array.append(employee_name.get_attribute('innerText'))
-#     role_array.append(employee_role.get_attribute('innerText'))
-
-#     print(employee_name.get_attribute('innerText'))
-#     print(employee_role.get_attribute('innerText'))
-    
-#     employee_role.click()
-#     employee_home = driver.find_element_by_xpath(f'//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div[1]/div[6]/div[2]/div/div/div[2]/div/div[1]/div[3]/div/div[2]/div/div/div[2]')
-
-    
-#     home_array.append(employee_home.get_attribute('innerText'))
-#     print(employee_home.get_attribute('innerText'))
-
-#     tr=tr+1
-
-# # click next
-# nex.click()
-# time.sleep(2)
-
-# element = driver.find_element_by_xpath('//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div[2]/div[3]/div/a')
-# driver.execute_script("return arguments[0].scrollIntoView(true);", element)
-
-# tr = 2
-# for e in employees:
-#   while tr < 26:
-#     employee_name = driver.find_element_by_xpath(f'//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[{tr}]/td[1]/div/div[2]/div[3]/div/a')
-#     employee_role = driver.find_element_by_xpath(f'//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[{tr}]/td[2]')
-    
-#     name_array.append(employee_name.get_attribute('innerText'))
-#     role_array.append(employee_role.get_attribute('innerText'))
-
-#     print(employee_name.get_attribute('innerText'))
-#     print(employee_role.get_attribute('innerText'))
-    
-#     employee_role.click()
-#     employee_home = driver.find_element_by_xpath(f'//*[@id="provider-mounter"]/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div[1]/div[6]/div[2]/div/div/div[2]/div/div[1]/div[3]/div/div[2]/div/div/div[2]')
-
-    
-#     home_array.append(employee_home.get_attribute('innerText'))
-#     print(employee_home.get_attribute('innerText'))
-
-#     tr=tr+1
