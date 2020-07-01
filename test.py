@@ -6,8 +6,7 @@ data = [sheet.cell_value(r, c) for c in range(sheet.ncols) for r in range(sheet.
 data = list(dict.fromkeys(data))
 data.pop(0)
 
-for d in data:
-  print(d)
+print(data)
 
 
 
