@@ -7,7 +7,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 import numpy as np
 import pandas as pd
 import csv
+# from apollo.py import num_total_emp
 
+# print(num_total_emp)
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get('https://www.missingmoney.com/en/Property/Search')
@@ -25,9 +27,10 @@ good_states = ['AL', 'AK', 'AZ', 'AR', 'CO', 'DC',
   'FL', 'ID', 'IL', 'IA', 'KY', 'LA', 'ME', 'MD',
   'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 
   'NH', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'RI',
-  'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WV', 'WI']
+  'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WV', 'WI'] 
+company = '480Weiss_Memorial_Hospital'
 
-with open('/Users/danielschwartz/Desktop/SF_csv/Blind.csv', newline='') as csvfile:
+with open('/Users/danielschwartz/Desktop/SF_csv/480Weiss_Memorial_Hospital.csv', newline='') as csvfile:
   data = list(csv.reader(csvfile))
 for role in data:
   role.pop(0)
@@ -131,10 +134,10 @@ for i in array:
   name_array.append(name)
 print(name_array)
 addy_array = []
-temp_addy = []
 reporter_array = []
-temp_reporter = []
 for d in array:
+  temp_addy = []
+  temp_reporter = []
   name_input = driver.find_element_by_xpath('//*[@id="SearchName"]')
   city_input = driver.find_element_by_xpath('//*[@id="City"]')
   state_input = driver.find_element_by_xpath('//*[@id="State"]')
@@ -157,7 +160,7 @@ for d in array:
   time.sleep(3)
   tr = 1
   try:
-    string = driver.find_element_by_xpath('//*[@id="cd-main-content"]/div/div[5]/div[1]')
+    string = driver.find_element_by_xpath('//*[@id="cd-main-content"]/div/div[4]/div[1]')
     string = str(string.get_attribute('innerText'))
     split = 'of'
     string = string.partition(split)[2]
@@ -172,23 +175,39 @@ for d in array:
       tr = tr+3
     addy_array.append(temp_addy)
     reporter_array.append(temp_reporter)
-    temp_addy = []
-    temp_reporter = []
- 
+    # temp_addy = []
+    # temp_reporter = []
+    time.sleep(1)
+    print(addy_array)
+    print(reporter_array)
   except:
-    temp_addy = []
-    temp_reporter = []
+    print("except")
+    # temp_addy = []
+    # temp_reporter = []
     addy_array.append(temp_addy)
     reporter_array.append(temp_reporter)
+    time.sleep(1)
+    print(addy_array)
+    print(reporter_array)
 
-np_array = np.array(name_array)
-np_addy_array = np.array(addy_array)
-np_reporter_array = np.array(reporter_array)
 
-print(addy_array)
-print(reporter_array)
+sub_array = []
+big_array = []
+count = 0
+
+while count < len(name_array):
+  sub_array.append(name_array[count])
+  sub_array.append(addy_array[count])
+  sub_array.append(reporter_array[count])
+  count = count+1
+  big_array.append(sub_array)
+  sub_array = []
+
+print(big_array)
   
+np_big_array = np.array(big_array)
 
-
-df = pd.DataFrame({"name/city/state" : np_array, "address" : np_addy_array, "reporter" : np_reporter_array})
-df.to_csv("/Users/danielschwartz/Desktop/test.csv")
+df = pd.DataFrame(np_big_array)
+# company = company.replace(" ", "_")
+mm = 'mm_'
+df.to_csv(f"/Users/danielschwartz/Desktop/mm_csv/{mm}.csv")
