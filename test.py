@@ -1,3 +1,3 @@
-mm = 'mm_'
-
-print(f"hello{mm}")
+nine = 3*3
+nine = nine*2
+print(nine)
