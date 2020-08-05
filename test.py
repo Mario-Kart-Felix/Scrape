@@ -1,15 +1,35 @@
 import os
 import xlrd
+import pandas as pd
+import csv
 
-x = 1
+# # GET MM THATS NOT IN APOLLO
+x = []
+for filename in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/mm_csvs/2nd_release/mm_mass')):
+  filename = filename.split('_')[3:]
+  filename = '_'.join(filename)
+  x.append(filename)
+# print(x)
+
+y=1
 arr = []
-for filename in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/apollo_csvs/mass')):
-  # filename = filename.split('_')[1:]
-  # filename = '_'.join(filename)
-  arr.append(filename)
-  x+=1
+for filename in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/mm_csvs/mm_layoffs')):
+  z = filename
+  filename = filename.split('_')[1:]
+  filename = '_'.join(filename)
+  if filename not in x:
+    arr.append(z)
+
+  y+=1
 print(arr)
-print(x)
+print(y)
+
+
+
+# m=1
+# for filename in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/apollo_csvs/mass')):
+#   m+=1
+# print(m)
 
 # new = []
 
@@ -107,3 +127,7 @@ data = ['Quick Base', 'Qioptiq, An Excelitas Technologies Company', 'Sapient Con
 
 # RESTNEWYORKFILES = ['140_JVC_Broadcasting.csv', '140_Jewish_Senior_Life_of_Rochester.csv', '140_Jones_Memorial_Hospital.csv', '140_Jopwell.csv', '140_Jujamcyn_Theaters_LLC.csv', '140_K_Health.csv', '140_Kadmon.csv', '140_Kenmore_Mercy_Hospital.csv', "140_Khan's_Tutorial.csv", '140_Kidz_Therapy_Services.csv', '140_Knock.csv', '140_Kualitatem_Inc..csv', '140_LOOP_Digital_Inc..csv', '140_LREI.csv', '140_Lambda_Legal.csv', '140_Landauer_Metropolitan.csv', '140_Level_Group_-_New_York.csv', '140_Lexington_Center_For_Recovery.csv', '140_Liberty_Life_Assurance_Co.csv', '140_Lineate.csv', '140_Priority_Healthcare_Group.csv', '140_Privet_Investments_LLC.csv', '140_R2Net_Inc_-_JamesAllen.com.csv', '140_RANE_(Risk_Assistance_Network_+_Exchange).csv', '140_RED_Model_Management_-_RED_NYC.csv', '140_Radius_Global_Market_Research.csv', '140_Raia_Drogasil_S.A..csv', '140_Ralph_Appelbaum_Associates.csv', '140_Real_E-Stats.csv', '140_Rebecca_Taylor.csv', '140_Richloom_Fabrics_Group.csv', '140_Rochester_Museum_&_Science_Center.csv', '140_Rockrose_Development_Corp..csv', '140_Rustans_Coffee_CORP.csv', '140_SEVENROOMS.csv', '140_SOMOS_Community_Care.csv', '140_SPIRE_GROUP.csv', '140_SPORTS195.csv', '140_Schools_&_You.csv', '140_Siguler_Guff_&_Company.csv', '140_SmartAsset.csv', '140_Soleo.csv', '140_Solvay_Bank.csv', '140_Something_Digital.csv', '140_Star_Construction.csv', '140_Stellar_Services.csv', '140_StreetWise_Partners.csv', '140_Strong_Hospital.csv', '140_Stuyvesant_High_School.csv', '140_Suffolk_Transportation_Svc_Inc.csv', '140_Suit_KOTE.csv', '140_Super_Enterprises.csv', '140_SupplyHouse.com.csv', '140_Synthesio.csv', '140_TDT_INC.csv', '140_TEC_Systems,_Inc..csv', '140_TMP_Directional_Marketing.csv', '140_TSR_Consulting_Services,_Inc.csv', '140_Team_Whistle.csv', '140_Ted_Moudis_Associates.csv', '140_Terra-Gen,_LLC.csv', '140_The_Alliance_for_Positive_Change.csv', '140_The_C-Suite_Network.csv', '140_The_Explorers_Club.csv', '140_The_Garden_City_Hotel.csv', '140_The_Mental_Health_Association_of_Westchester_Inc..csv', '140_The_NoMad_Hotel_New_York.csv', '140_The_Raine_Group.csv', '140_The_Real_Deal.csv', '140_Theatre_Communications_Group.csv', '140_Tompkins_Insurance.csv', '140_Tompkins_Trust_Company.csv', '140_Topix_Pharmaceuticals,_Inc..csv', '140_Town_and_Country_Living.csv', '140_Traub_Lieberman_Straus_&_Shrewsberry_LLP.csv', '140_Trepp,_LLC.csv', '140_Trinity_Packaging_Corp.csv', '140_Troy_City_Schools.csv', '140_Truelogic_Software.csv', '140_Tully_Rinckey_PLLC.csv', "140_Turkish_Women's_International_Network.csv", '140_Understood.csv', '140_Union_Theological_Seminary.csv', '140_UroGen_Pharma.csv', '140_Usherwood_Office_Technology.csv', '140_VAI_(Vormittag_Associates,_Inc.).csv', '140_VAST_Data.csv', '140_Valiant_Solutions,_Inc..csv', '140_Vibrant_Media.csv', '140_Vicon_Industries.csv', '140_Vince_Camuto.csv', '140_Vistar_Media.csv', '140_WILDTYPE,_a_TBWA\\WorldHealth_Company.csv', '140_WTMC.csv', '140_Wealth_Advisory_Group_LLC.csv', '140_Weiss_Multi-Strategy_Advisers_LLC.csv', '140_Westchester_Institute_For_Human_Development.csv', '140_Windham_Mountain_Resort.csv', '140_Wolf-Gordon.csv', "140_Women's_World_Banking.csv", '140_Woori_America_Bank.csv', '140_Worldwide_Travel_Staffing,_Ltd..csv', '140_Y2k_Computer_Solutions.csv', '140_Yoga_To_The_People.csv', '140_Yonkers_Contracting_Company,_Inc..csv', '140_YouNow,_Inc..csv', '140_Young_Adult_Institute_Inc.csv', '140_Zoni_Language_Centers.csv', '140_eos_Products.csv', '140_innRoad.csv', '150_Art_+_Commerce.csv', '150_Bar_Tabac.csv', '150_Basic_Resources,_Inc..csv', '150_Bliwa_Livförsäkring.csv', 
 # '150_CAAT_Inc.csv', '150_CPI_Aerostructures.csv', '150_Carver_Federal_Savings_Bank.csv', '150_Community_Counseling_and_Mediation.csv', '150_Day_Automation.csv', '150_EXCELSIOR_ORTHOPAEDICS.csv', '150_Eger_Health_Care_and_Rehabilitation_Center.csv', '150_Expert_Institute.csv', '150_GDI_Services,_Inc..csv', '150_Generation_Ready.csv', '150_German_American_Chamber_of_Commerce,_Inc..csv', '150_Glens_Falls_National_Bank_&_Trust_Co..csv', '150_Grafana_Labs.csv', '150_Greater_Than_One.csv', '150_Greek_Orthodox_Archdiocese_of_America.csv', '150_Haas,_Inc..csv', '150_Harris_Healthcare.csv', '150_Hearth_Management.csv', '150_Hyperscience.csv', '150_ISAAC_Heating_and_Air_Conditioning.csv', '150_ITT_Enidine.csv', '150_Iglesia_De_Dios_De_La_Profecia.csv', '150_ImpreMedia.csv', '150_InfoDesk.csv', '150_Insider_Intelligence.csv', '150_Installs_LLC.csv', '150_Internal_Medicines.csv', '150_Joomla!.csv', '150_Keller_Williams_Realty_Greater_Rochester.csv', '150_Keller_Williams_Realty_Partners_New_York.csv', '150_Krung_Thai_Bank_LTD.csv', '150_Lee_Spring.csv', '150_MeritDirect.csv', '150_NYIC_(NEW_YORK_INTERNATIONAL_CAPITAL,_LLC).csv', "150_NYS_Teachers'\u200b_Retirement_System.csv", '150_Oneida_Herkimer_Madison_BOCES.csv', '150_PJ_SOLOMON.csv', '150_Packet,_an_Equinix_Company.csv', '150_Power_Drives_Inc..csv', '150_Praytell.csv', '150_SKIP_of_NY.csv', '150_Select_Equity_Group,_L.P..csv', '150_Shiraz_Creative.csv', '150_SmartFlyer.csv', '150_Sunmount_Ddso.csv', '150_Tfl_Transport.csv', '150_The_Chazen_Companies.csv', '150_The_Earth_Institute,_Columbia_University.csv', '150_The_Solomon_Organization.csv', '150_Update_Legal.csv', '150_Vestal_Central_School_District.csv', '150_Vida_Shoes_International.csv', '150_Worth_New_York.csv', '150_Z-Tech.csv', '15_Promesa,_Inc..csv', "160_ST._LUKE'S_ROOSEVELT_HOSPITAL.csv", '170_Wing.csv', '19_Chdc.csv', '207,000_精进电动科技股份有限公司.csv', '220_VIVALDI_.csv', '22_OLE.csv', '242,000_騰訊WE+.csv', '25,000_eni.csv', '260_Pilot.csv', '260_Vernalis..csv', '26_Taco.csv', '27_Merlin.csv', '2_Ladders.csv', '360_KS&R.csv', '3_GreenSlate.csv', '3_The_Principle_Group.csv', '44_GEM.csv', '57_21GRAMS.csv', '66_Seneca.csv', '6_Gravitas.csv', '75_Foodlink.csv', '760_Paperchase.csv', '76_Chrysalis.csv', '76_Scotts_Lawn_Service.csv', '7_PTJ.csv', '7_hue.csv', '80_AWH.csv', '80_Marist_Brothers.csv', '82_New_Horizon_Counseling_Center.csv', '87_DOROT.csv']
+
+
+# for filename in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/apollo_csvs/mass')):
+

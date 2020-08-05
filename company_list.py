@@ -7,8 +7,8 @@ import pandas as pd
 big_array = []
 total = 0
 total_people_searched = 0
-for company in sorted(os.listdir('/Users/danielschwartz/Desktop/Simplefuture/mm_csvs/fundxnofund')):
-  with open(os.path.join('/Users/danielschwartz/Desktop/Simplefuture/mm_csvs/fundxnofund', company)) as csvfile:
+for company in sorted(os.listdir('/Users/danielschwartz/Desktop/Simplefuture/mm_csvs/2nd_release/mm_mass_2')):
+  with open(os.path.join('/Users/danielschwartz/Desktop/Simplefuture/mm_csvs/2nd_release/mm_mass_2', company)) as csvfile:
     data = list(csv.reader(csvfile))
   csv_array = []
   c = company.split('_')[3:]
@@ -42,13 +42,14 @@ for company in sorted(os.listdir('/Users/danielschwartz/Desktop/Simplefuture/mm_
       elif value == 'Less':
         person_total_dollars += 50
       else:
-        person_total_dollars = int(value.split('$')[1])
+        person_total_dollars = 100
     # print(person_total_dollars)
     company_portion_dollars+=person_total_dollars
   if portion_people >= 10 and percentage != 0:
     total_company_dollars = (int(total_people)/int(portion_people)) * company_portion_dollars
     csv_array.append(str(round(percentage * 100))+"%")
     csv_array.append("$"+str(round(total_company_dollars)))
+    csv_array.append('MA')
     big_array.append(csv_array)
     total+=total_company_dollars
     total_people_searched+=portion_people
@@ -57,8 +58,8 @@ for company in sorted(os.listdir('/Users/danielschwartz/Desktop/Simplefuture/mm_
     continue  
 
 np_big_array = np.array(big_array)
-df = pd.DataFrame(np_big_array, columns = ['Company Name', 'Percentage With UP', 'Total Money'])
-df.to_csv("/Users/danielschwartz/Desktop/Simplefuture/aggregate_csv.csv")
+df = pd.DataFrame(np_big_array, columns = ['Company Name', 'Percentage With UP', 'Total Money', 'State'])
+df.to_csv("/Users/danielschwartz/Desktop/mass_2.csv")
 print(big_array)
 print(total)
 print(total_people_searched)
