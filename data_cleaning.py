@@ -383,8 +383,10 @@ def laFunc():
 
 def WiFunc():
   df = pd.read_csv(f"/Users/danielschwartz/Desktop/simplefuture/State_Data/WI/WI.csv", low_memory=False, error_bad_lines=False)
+  # Name current columns the right names
   df.columns = ['year_reported', 'property_id', 'owner_lastname', 'owner_firstname', 'owner_middlename', 'owner_street_1', 'owner_street_2', 'owner_city', 'owner_state', 'owner_zip', 'cash_reported', 'property_type', 'holder_name', 'date_reported']
   df.drop(['year_reported'], axis=1, inplace=True, errors='ignore')
+  # Add empty columns
   df['reported_tangible_items'] = np.nan
   df['no_of_owners'] = np.nan
   df['cusip'] = np.nan
@@ -402,14 +404,18 @@ def WiFunc():
   df['holder_zip'] = np.nan
   df['shares_reported'] = np.nan
   df['holder_name'] = np.nan
+  # Drop NA values in fields
   df['owner_firstname'].replace('', np.nan, inplace=True)
   df['owner_lastname'].replace('', np.nan, inplace=True)
   df['owner_city'].replace('', np.nan, inplace=True)
   df.dropna(subset=['owner_firstname'], inplace=True)
   df.dropna(subset=['owner_lastname'], inplace=True)
   df.dropna(subset=['owner_city'], inplace=True)
+  # Make fields lower case
   df = df.applymap(lambda s:s.lower() if type(s) == str else s)
+  # reorder columns to stay consistent 
   df = df[['owner_firstname', 'owner_middlename', 'owner_lastname', 'owner_street_1', 'owner_street_2', 'owner_street_3', 'owner_city', 'owner_state', 'owner_zip', 'no_of_owners', 'owner_country_code', 'current_cash_balance', 'number_of_pending_claims', 'number_of_paid_claims', 'date_of_last_contact', 'holder_name', 'holder_street_1', 'holder_street_2', 'holder_street_3', 'holder_city', 'holder_state', 'holder_zip', 'property_id', 'date_reported', 'property_type', 'cash_reported', 'shares_reported', 'reported_tangible_items', 'cusip']]
+  # return new csv
   df.to_csv('/Users/danielschwartz/Desktop/Simplefuture/State_Data/WI/new_WI.csv', index=None)
 
 
