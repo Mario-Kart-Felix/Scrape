@@ -4,6 +4,7 @@ import csv
 import os 
 import re
 import string
+import xlrd
 
 # MASS DATA
 def massFunc():
@@ -380,6 +381,38 @@ def laFunc():
   df = df[['owner_firstname', 'owner_middlename', 'owner_lastname', 'owner_street_1', 'owner_street_2', 'owner_street_3', 'owner_city', 'owner_state', 'owner_zip', 'no_of_owners', 'owner_country_code', 'current_cash_balance', 'number_of_pending_claims', 'number_of_paid_claims', 'date_of_last_contact', 'holder_name', 'holder_street_1', 'holder_street_2', 'holder_street_3', 'holder_city', 'holder_state', 'holder_zip', 'property_id', 'date_reported', 'property_type', 'cash_reported', 'shares_reported', 'reported_tangible_items', 'cusip']]
   df.to_csv('/Users/danielschwartz/Desktop/Simplefuture/State_Data/LA/new_LA_9.csv', index=None)
 
+def WiFunc():
+  df = pd.read_csv(f"/Users/danielschwartz/Desktop/simplefuture/State_Data/WI/WI.csv", low_memory=False, error_bad_lines=False)
+  df.columns = ['year_reported', 'property_id', 'owner_lastname', 'owner_firstname', 'owner_middlename', 'owner_street_1', 'owner_street_2', 'owner_city', 'owner_state', 'owner_zip', 'cash_reported', 'property_type', 'holder_name', 'date_reported']
+  df.drop(['year_reported'], axis=1, inplace=True, errors='ignore')
+  df['reported_tangible_items'] = np.nan
+  df['no_of_owners'] = np.nan
+  df['cusip'] = np.nan
+  df['owner_street_3'] = np.nan 
+  df['owner_country_code'] = np.nan   
+  df['current_cash_balance'] = np.nan
+  df['number_of_pending_claims'] = np.nan   
+  df['number_of_paid_claims'] = np.nan   
+  df['date_of_last_contact'] = np.nan   
+  df['holder_street_1'] = np.nan   
+  df['holder_street_2'] = np.nan   
+  df['holder_street_3'] = np.nan   
+  df['holder_city'] = np.nan   
+  df['holder_state'] = np.nan   
+  df['holder_zip'] = np.nan
+  df['shares_reported'] = np.nan
+  df['holder_name'] = np.nan
+  df['owner_firstname'].replace('', np.nan, inplace=True)
+  df['owner_lastname'].replace('', np.nan, inplace=True)
+  df['owner_city'].replace('', np.nan, inplace=True)
+  df.dropna(subset=['owner_firstname'], inplace=True)
+  df.dropna(subset=['owner_lastname'], inplace=True)
+  df.dropna(subset=['owner_city'], inplace=True)
+  df = df.applymap(lambda s:s.lower() if type(s) == str else s)
+  df = df[['owner_firstname', 'owner_middlename', 'owner_lastname', 'owner_street_1', 'owner_street_2', 'owner_street_3', 'owner_city', 'owner_state', 'owner_zip', 'no_of_owners', 'owner_country_code', 'current_cash_balance', 'number_of_pending_claims', 'number_of_paid_claims', 'date_of_last_contact', 'holder_name', 'holder_street_1', 'holder_street_2', 'holder_street_3', 'holder_city', 'holder_state', 'holder_zip', 'property_id', 'date_reported', 'property_type', 'cash_reported', 'shares_reported', 'reported_tangible_items', 'cusip']]
+  df.to_csv('/Users/danielschwartz/Desktop/Simplefuture/State_Data/WI/new_WI.csv', index=None)
+
+
 def concatFunc(): 
   frames = []
   for folder in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/state_data')):
@@ -395,6 +428,7 @@ def concatFunc():
   result = pd.concat(frames, sort=True)
   result.to_csv(f'/Users/danielschwartz/Desktop/Simplefuture/State_Data/concat/concat.csv', index=None)
 
+
 def testFunc():
   # for folder in (os.listdir('/Users/danielschwartz/Desktop/simplefuture/state_data')):
   #   if folder != "concat" and folder != "CA":
@@ -407,4 +441,4 @@ def testFunc():
           frame = pd.read_csv(frame)
           print(frame.columns)
 
-concatFunc()
+WiFunc()
