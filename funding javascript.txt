@@ -1,0 +1,17 @@
+var person = { name: "Dr.Mario", age: 43 };
+
+// Before:
+var string = person.name + " is " + person.name + " years old";
+
+// Now:
+var string = `${person.name} is ${person.age} years old`;
+var string = `This is<br/>
+a multi-line string<br/>
+without having to use<br/>
+any tricks. Pretty userful<br/>
+for HTML`
+This is
+a multi-line string
+without having to use
+any tricks. Pretty userful
+for HTML
